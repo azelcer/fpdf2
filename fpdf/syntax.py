@@ -79,6 +79,7 @@ from typing import (
     TypeAlias,
     Union,
     runtime_checkable,
+    cast,
 )
 
 from .util import Number, NumberClass, escape_parens, number_to_str
@@ -245,7 +246,7 @@ class PDFContentStream(PDFObject):
 
     def __init__(self, contents: bytes | bytearray, compress: bool = False):
         super().__init__()
-        self._contents = (
+        self._contents: bytes = (
             zlib.compress(contents, level=self._COMPRESSION_LEVEL)
             if compress
             else bytes(contents)
@@ -256,6 +257,13 @@ class PDFContentStream(PDFObject):
     # method override
     def content_stream(self) -> bytes:
         return self._contents
+
+    def __getitem__(self, keys: Any) -> bytes:
+        """Forward to content.
+
+        Useless if compressed
+        """
+        return cast(bytes, self._contents[keys])
 
     # method override
     def serialize(
