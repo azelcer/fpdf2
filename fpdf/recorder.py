@@ -88,3 +88,46 @@ class CallRecorder:
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         self._calls.append((self._func, args, kwargs))
         return self._func(*args, **kwargs)
+
+
+class FPDFStateCheckPoint:
+    """
+    The class is aimed to be used as wrapper around fpdf.FPDF:
+
+        pdf = FPDF()
+        recorder = FPDFStateCheckPoint(pdf)
+
+    It allows to **rewind** to the state of the FPDF instance passed to
+    its constructor, provided that it has not been closed. It is less memory
+    demanding than FPDFRecorder.
+    """
+
+    def __init__(
+        self,
+        pdf: "FPDF",
+    ):
+        self.pdf = pdf
+        pdf_dict = vars(self.pdf)
+        buffer = pdf_dict.pop("pages")
+        self._old_keys: list[int] = list(buffer.keys())
+        self._old_pos = len(buffer[self._old_keys[-1]].contents)
+        self._initial = deepcopy(self.pdf.__dict__)
+        self.pdf.pages = buffer
+
+    def __getattr__(self, name: Any) -> Any:
+        """Proxy around contained FPDF."""
+        attr = getattr(self.pdf, name)
+        return attr
+
+    def rewind(self) -> None:
+        buffer = self.pdf.pages
+        last_valid_page = buffer[self._old_keys[-1]]
+        if not isinstance(last_valid_page.contents, bytearray):
+            raise FPDFException("Can not rewind closed file")
+        last_valid_page.contents = last_valid_page.contents[: self._old_pos]
+        pdf_dict = vars(self.pdf)
+        pdf_dict.clear()
+        pdf_dict.update(self._initial)
+        for k in list(buffer.keys())[len(self._old_keys) :]:
+            del buffer[k]
+        self.pdf.pages = buffer
