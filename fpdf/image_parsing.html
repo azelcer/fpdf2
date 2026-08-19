@@ -51,7 +51,7 @@ el.replaceWith(d);
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L705-L732" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L849-L876" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def ccitt_payload_location_from_pil(img: &#34;PILImage&#34;) -&gt; tuple[int, int]:
     &#34;&#34;&#34;
@@ -91,7 +91,7 @@ el.replaceWith(d);
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L895-L905" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L1039-L1049" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def clear_table() -&gt; tuple[dict[bytes, int], int, int, int]:
     &#34;&#34;&#34;
@@ -114,7 +114,7 @@ el.replaceWith(d);
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L443-L677" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L587-L821" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def get_img_info(
     filename: Union[str, BinaryIO, Path],
@@ -352,8 +352,9 @@ el.replaceWith(d);
     )
     return info</code></pre>
 </details>
-<div class="desc"><h2 id="args">Args</h2>
-<dl>
+<div class="desc"><dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>filename</code></strong></dt>
 <dd>in a format that can be passed to load_image</dd>
 <dt><strong><code>img</code></strong></dt>
@@ -363,19 +364,20 @@ el.replaceWith(d);
 </dl></div>
 </dd>
 <dt id="fpdf.image_parsing.get_svg_info"><code class="name flex">
-<span>def <span class="ident">get_svg_info</span></span>(<span>filename: str,<br>img: <class 'BinaryIO'>,<br>image_cache: <a title="fpdf.image_datastructures.ImageCache" href="image_datastructures.html#fpdf.image_datastructures.ImageCache">ImageCache</a>,<br>resource_access_policy: <a title="fpdf.enums.ResourceAccessPolicy" href="enums.html#fpdf.enums.ResourceAccessPolicy">ResourceAccessPolicy</a> = ResourceAccessPolicy.DEFAULT) ‑> tuple[str, <a title="fpdf.svg.SVGObject" href="svg.html#fpdf.svg.SVGObject">SVGObject</a>, <a title="fpdf.image_datastructures.VectorImageInfo" href="image_datastructures.html#fpdf.image_datastructures.VectorImageInfo">VectorImageInfo</a>]</span>
+<span>def <span class="ident">get_svg_info</span></span>(<span>filename: str,<br>img: <class 'BinaryIO'>,<br>image_cache: <a title="fpdf.image_datastructures.ImageCache" href="image_datastructures.html#fpdf.image_datastructures.ImageCache">ImageCache</a>,<br>resource_access_policy: <a title="fpdf.enums.ResourceAccessPolicy" href="enums.html#fpdf.enums.ResourceAccessPolicy">ResourceAccessPolicy</a> = ResourceAccessPolicy.DEFAULT,<br>svg_limits: <a title="fpdf.svg.SVGLimits" href="svg.html#fpdf.svg.SVGLimits">SVGLimits</a> | None = None) ‑> tuple[str, <a title="fpdf.svg.SVGObject" href="svg.html#fpdf.svg.SVGObject">SVGObject</a>, <a title="fpdf.image_datastructures.VectorImageInfo" href="image_datastructures.html#fpdf.image_datastructures.VectorImageInfo">VectorImageInfo</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L418-L440" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L560-L584" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def get_svg_info(
     filename: str,
     img: BinaryIO,
     image_cache: ImageCache,
     resource_access_policy: ResourceAccessPolicy = ResourceAccessPolicy.DEFAULT,
+    svg_limits: Optional[SVGLimits] = None,
 ) -&gt; tuple[str, SVGObject, VectorImageInfo]:
     img.seek(0)
     svg_data = img.read()
@@ -383,6 +385,7 @@ el.replaceWith(d);
         svg_data,
         image_cache=image_cache,
         resource_access_policy=resource_access_policy,
+        svg_limits=svg_limits,
     )
     if svg.viewbox:
         _, _, w, h = svg.viewbox
@@ -404,7 +407,7 @@ el.replaceWith(d);
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L399-L415" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L541-L557" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">@no_type_check
 def is_iccp_valid(iccp: bytes, filename: str | Path) -&gt; bool:
@@ -433,7 +436,7 @@ def is_iccp_valid(iccp: bytes, filename: str | Path) -&gt; bool:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L354-L386" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L493-L528" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def load_image(
     filename: str | Path | BinaryIO,
@@ -452,11 +455,13 @@ def is_iccp_valid(iccp: bytes, filename: str | Path) -&gt; bool:
         return BytesIO(filename.read())
     if isinstance(filename, Path):
         filename = str(filename)
-    _validate_resource_access(filename, resource_access_policy)
     # Resource access is governed by the active resource_access_policy.
     if filename.startswith((&#34;http://&#34;, &#34;https://&#34;)):
-        opener = build_opener(
-            _ResourceAccessPolicyRedirectHandler(resource_access_policy)
+        pinned_addresses_by_url = {
+            filename: _validate_remote_url_access(filename, resource_access_policy)
+        }
+        opener = _build_remote_resource_opener(
+            resource_access_policy, pinned_addresses_by_url
         )
         # disabling bandit &amp; semgrep rules as permitted schemes are whitelisted:
         # nosemgrep: python.lang.security.audit.dynamic-urllib-use-detected.dynamic-urllib-use-detected
@@ -466,6 +471,7 @@ def is_iccp_valid(iccp: bytes, filename: str | Path) -&gt; bool:
             return BytesIO(url_file.read())
     elif filename.startswith(&#34;data:&#34;):
         return _decode_base64_image(filename)
+    _validate_resource_access(filename, resource_access_policy)
     with open(filename, &#34;rb&#34;) as local_file:
         return BytesIO(local_file.read())</code></pre>
 </details>
@@ -480,7 +486,7 @@ It always return a BytesIO buffer.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L852-L892" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L996-L1036" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def pack_codes_into_bytes(codes: Iterable[int]) -&gt; bytes:
     &#34;&#34;&#34;
@@ -528,19 +534,20 @@ It always return a BytesIO buffer.</p></div>
 The bit-width starts at 9 bits and expands as needed.</p></div>
 </dd>
 <dt id="fpdf.image_parsing.preload_image"><code class="name flex">
-<span>def <span class="ident">preload_image</span></span>(<span>image_cache: <a title="fpdf.image_datastructures.ImageCache" href="image_datastructures.html#fpdf.image_datastructures.ImageCache">ImageCache</a>,<br>name: str | bytes | <class 'BinaryIO'> | PILImage | pathlib.Path | None,<br>dims: tuple[float, float] | None = None,<br>resource_access_policy: <a title="fpdf.enums.ResourceAccessPolicy" href="enums.html#fpdf.enums.ResourceAccessPolicy">ResourceAccessPolicy</a> = ResourceAccessPolicy.DEFAULT) ‑> tuple[str, <a title="fpdf.svg.SVGObject" href="svg.html#fpdf.svg.SVGObject">SVGObject</a> | Any | bytes | <class 'BinaryIO'> | pathlib.Path | None, <a title="fpdf.image_datastructures.RasterImageInfo" href="image_datastructures.html#fpdf.image_datastructures.RasterImageInfo">RasterImageInfo</a> | <a title="fpdf.image_datastructures.VectorImageInfo" href="image_datastructures.html#fpdf.image_datastructures.VectorImageInfo">VectorImageInfo</a>]</span>
+<span>def <span class="ident">preload_image</span></span>(<span>image_cache: <a title="fpdf.image_datastructures.ImageCache" href="image_datastructures.html#fpdf.image_datastructures.ImageCache">ImageCache</a>,<br>name: str | bytes | <class 'BinaryIO'> | PILImage | pathlib.Path | None,<br>dims: tuple[float, float] | None = None,<br>resource_access_policy: <a title="fpdf.enums.ResourceAccessPolicy" href="enums.html#fpdf.enums.ResourceAccessPolicy">ResourceAccessPolicy</a> = ResourceAccessPolicy.DEFAULT,<br>svg_limits: <a title="fpdf.svg.SVGLimits" href="svg.html#fpdf.svg.SVGLimits">SVGLimits</a> | None = None) ‑> tuple[str, <a title="fpdf.svg.SVGObject" href="svg.html#fpdf.svg.SVGObject">SVGObject</a> | Any | bytes | <class 'BinaryIO'> | pathlib.Path | None, <a title="fpdf.image_datastructures.RasterImageInfo" href="image_datastructures.html#fpdf.image_datastructures.RasterImageInfo">RasterImageInfo</a> | <a title="fpdf.image_datastructures.VectorImageInfo" href="image_datastructures.html#fpdf.image_datastructures.VectorImageInfo">VectorImageInfo</a>]</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L219-L339" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L352-L478" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def preload_image(
     image_cache: ImageCache,
     name: ImageType,
     dims: Optional[tuple[float, float]] = None,
     resource_access_policy: ResourceAccessPolicy = ResourceAccessPolicy.DEFAULT,
+    svg_limits: Optional[SVGLimits] = None,
 ) -&gt; tuple[
     str,
     Union[SVGObject, &#34;PILImage&#34;, bytes, BinaryIO, Path, None],
@@ -586,8 +593,11 @@ The bit-width starts at 9 bits and expands as needed.</p></div>
                 load_image(name, resource_access_policy=resource_access_policy),
                 image_cache=image_cache,
                 resource_access_policy=resource_access_policy,
+                svg_limits=svg_limits,
             )
         except FPDFResourceAccessError:
+            raise
+        except FPDFException:
             raise
         except Exception as error:
             raise ValueError(f&#34;Could not parse file: {name}&#34;) from error
@@ -597,6 +607,7 @@ The bit-width starts at 9 bits and expands as needed.</p></div>
             io.BytesIO(name),
             image_cache=image_cache,
             resource_access_policy=resource_access_policy,
+            svg_limits=svg_limits,
         )
     if isinstance(name, io.BytesIO) and _is_svg(name.getvalue().strip()):
         return get_svg_info(
@@ -604,6 +615,7 @@ The bit-width starts at 9 bits and expands as needed.</p></div>
             name,
             image_cache=image_cache,
             resource_access_policy=resource_access_policy,
+            svg_limits=svg_limits,
         )
 
     # Load raster data.
@@ -662,8 +674,9 @@ The bit-width starts at 9 bits and expands as needed.</p></div>
 <p>For raster images: following this call, the image is inserted in <code>image_cache.images</code>,
 and following calls to <code><a title="fpdf.fpdf.FPDF.image" href="fpdf.html#fpdf.fpdf.FPDF.image">FPDF.image()</a></code> will re-use the same cached values, without re-reading the image.</p>
 <p>For vector images: the data is loaded and the metadata extracted.</p>
-<h2 id="args">Args</h2>
 <dl>
+<dt>Args</dt>
+<dt>-----=</dt>
 <dt><strong><code>image_cache</code></strong></dt>
 <dd>an <code>ImageCache</code> instance, usually the <code>.image_cache</code> attribute of a <code>FPDF</code> instance.</dd>
 <dt><strong><code>name</code></strong></dt>
@@ -683,7 +696,7 @@ and an instance of a subclass of <code>ImageInfo</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L735-L785" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L879-L929" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">def transcode_monochrome(img: &#34;PILImage&#34;) -&gt; bytes:
     &#34;&#34;&#34;
@@ -752,7 +765,7 @@ and an instance of a subclass of <code>ImageInfo</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L66-L71" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L74-L79" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">@dataclass
 class ImageSettings:
@@ -782,7 +795,7 @@ class ImageSettings:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/py-pdf/fpdf2/blob/cfec5143f18c3214286c079e9ebf0e3cbaab6a66/fpdf/image_parsing.py#L680-L702" class="git-link" target="_blank">Browse git</a>
+<a href="https://github.com/py-pdf/fpdf2/blob/cd4c470c6f203a7637c4b77740142d1f0435f28c/fpdf/image_parsing.py#L824-L846" class="git-link" target="_blank">Browse git</a>
 </summary>
 <pre><code class="python">class temp_attr:
     &#34;&#34;&#34;
